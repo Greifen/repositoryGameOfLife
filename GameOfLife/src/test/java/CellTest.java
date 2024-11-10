@@ -25,9 +25,25 @@ class CellTest {
 	}
 
 	@Test
-	void test() {
-	//	Cell cell = new Cell(Cell.CellState.ALIVE);
-		
+	void test0Nachbarsterben() {
+		Cell cell = new Cell(Cell.CellState.ALIVE);
+		cell.nextState(0);
+		assertEquals(Cell.CellState.DEAD, cell.getCellState());
 	}
+
+	@Test
+	void test1Nachbarsterben() {
+		Cell cell = new Cell(Cell.CellState.ALIVE);
+		cell.nextState(1);
+		assertEquals(Cell.CellState.DEAD, cell.getCellState());
+	}
+
+	@Test
+	void test4Nachbarsterben() {
+		Cell cell = new Cell(Cell.CellState.ALIVE);
+		cell.nextState(4);
+		assertEquals(Cell.CellState.DEAD, cell.getCellState());
+	}
+	
 
 }

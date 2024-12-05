@@ -39,8 +39,8 @@ class CellTest {
 			// Reproduktion
 			"DEAD, 3, ALIVE",
 			// Kein Reproduzieren
-			"ALIVE, 0, DEAD", "ALIVE, 1, DEAD", "ALIVE, 2, ALIVE", "DEAD, 4, DEAD", "ALIVE, 5, DEAD", "ALIVE, 6, DEAD",
-			"ALIVE, 7, DEAD", "ALIVE, 8, DEAD" })
+			"DEAD, 0, DEAD", "DEAD, 1, DEAD", "DEAD, 2, DEAD", "DEAD, 4, DEAD", "DEAD, 5, DEAD", "DEAD, 6, DEAD",
+			"DEAD, 7, DEAD", "DEAD, 8, DEAD" })
 	void testNextState(Cell.CellState initialState, int neighbors, Cell.CellState expectedState) {
 		Cell cell = new Cell(initialState);
 		cell.nextState(neighbors);

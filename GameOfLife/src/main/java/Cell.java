@@ -1,17 +1,15 @@
 
 public class Cell {
 	
+	private CellState cellState;
 
-	
-	private Cell.CellState cellState;
-
-	public Cell(Cell.CellState cellstate) {
+	public Cell(CellState cellstate) {
 		this.cellState = cellstate;
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public Cell.CellState getCellState() {
+	public CellState getCellState() {
 		return cellState;
 	}
 
@@ -19,8 +17,22 @@ public class Cell {
 			ALIVE, DEAD
 	}
 
-	public void nextState(int i) {
-		cellState=Cell.CellState.DEAD;	
+	public void nextState(int anzahlNachbarn) {
+		if(cellState==CellState.ALIVE) {
+			//underpopulation, overcrowding
+			if(anzahlNachbarn<2||anzahlNachbarn>3) {
+				cellState=CellState.DEAD;	
+			}
+			//survival
+		}
+		else
+		{
+			//reproduction
+			if(anzahlNachbarn==3)
+			{
+				cellState=CellState.ALIVE;
+			}
+		}
 	}
 
 

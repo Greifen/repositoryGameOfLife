@@ -41,87 +41,9 @@ class CellTest {
 			// Kein Reproduzieren
 			"ALIVE, 0, DEAD", "ALIVE, 1, DEAD", "ALIVE, 2, ALIVE", "DEAD, 4, DEAD", "ALIVE, 5, DEAD", "ALIVE, 6, DEAD",
 			"ALIVE, 7, DEAD", "ALIVE, 8, DEAD" })
-	void testCellStateTransitions(Cell.CellState initialState, int neighbors, Cell.CellState expectedState) {
+	void testNextState(Cell.CellState initialState, int neighbors, Cell.CellState expectedState) {
 		Cell cell = new Cell(initialState);
 		cell.nextState(neighbors);
 		assertEquals(expectedState, cell.getCellState());
-	}
-
-
-	@Test
-	void test0Nachbarsterben() {
-		Cell cell = new Cell(Cell.CellState.ALIVE);
-		cell.nextState(0);
-		assertEquals(Cell.CellState.DEAD, cell.getCellState());
-	}
-
-	@Test
-	void test1Nachbarsterben() {
-		Cell cell = new Cell(Cell.CellState.ALIVE);
-		cell.nextState(1);
-		assertEquals(Cell.CellState.DEAD, cell.getCellState());
-	}
-
-	@Test
-	void test4Nachbarsterben() {
-		Cell cell = new Cell(Cell.CellState.ALIVE);
-		cell.nextState(4);
-		assertEquals(Cell.CellState.DEAD, cell.getCellState());
-	}
-
-	@Test
-	void test5Nachbarsterben() {
-		Cell cell = new Cell(Cell.CellState.ALIVE);
-		cell.nextState(5);
-		assertEquals(Cell.CellState.DEAD, cell.getCellState());
-	}
-
-	@Test
-	void test6Nachbarsterben() {
-		Cell cell = new Cell(Cell.CellState.ALIVE);
-		cell.nextState(6);
-		assertEquals(Cell.CellState.DEAD, cell.getCellState());
-	}
-
-	@Test
-	void test7Nachbarsterben() {
-		Cell cell = new Cell(Cell.CellState.ALIVE);
-		cell.nextState(7);
-		assertEquals(Cell.CellState.DEAD, cell.getCellState());
-	}
-
-	@Test
-	void test8Nachbarsterben() {
-		Cell cell = new Cell(Cell.CellState.ALIVE);
-		cell.nextState(8);
-		assertEquals(Cell.CellState.DEAD, cell.getCellState());
-	}
-
-	@Test
-	void test2NachbarUeberleben() {
-		Cell cell = new Cell(Cell.CellState.ALIVE);
-		cell.nextState(2);
-		assertEquals(Cell.CellState.ALIVE, cell.getCellState());
-	}
-
-	@Test
-	void test3NachbarUeberleben() {
-		Cell cell = new Cell(Cell.CellState.ALIVE);
-		cell.nextState(3);
-		assertEquals(Cell.CellState.ALIVE, cell.getCellState());
-	}
-
-	@Test
-	void test3NachbarReproduzieren() {
-		Cell cell = new Cell(Cell.CellState.DEAD);
-		cell.nextState(3);
-		assertEquals(Cell.CellState.ALIVE, cell.getCellState());
-	}
-
-	@Test
-	void test4NachbarReproduzieren() {
-		Cell cell = new Cell(Cell.CellState.DEAD);
-		cell.nextState(4);
-		assertEquals(Cell.CellState.DEAD, cell.getCellState());
 	}
 }

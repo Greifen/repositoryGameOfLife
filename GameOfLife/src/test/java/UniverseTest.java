@@ -42,11 +42,11 @@ class UniverseTest {
 			{O, X, X},
 			{X, X, O}
 		});
-		assertArrayEquals(universe.getState(),new Cell.CellState[][] {
+		assertArrayEquals(new Cell.CellState[][] {
 			{X, X, X},
 			{O, X, X},
 			{X, X, O}
-		});
+		}, universe.getState());
 	}
 	
 	@Test
@@ -57,11 +57,11 @@ class UniverseTest {
 			{X, X, O}
 		});
 		universe.nextState();
-		assertArrayEquals(universe.getState(),new Cell.CellState[][] {
+		assertArrayEquals(new Cell.CellState[][] {
 			{O, O, X},
 			{O, O, X},
 			{X, X, X}
-		});
+		}, universe.getState());
 	}
 
 }

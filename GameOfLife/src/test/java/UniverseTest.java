@@ -52,14 +52,14 @@ class UniverseTest {
 	@Test
 	void testnextState() {
 		Universe universe = new Universe(new Cell.CellState[][] {
-			{X, X, X},
+			{X, O, X},
 			{O, X, X},
 			{X, X, O}
 		});
 		universe.nextState();
 		assertArrayEquals(universe.getState(),new Cell.CellState[][] {
-			{X, O, X},
-			{O, O, O},
+			{O, O, X},
+			{O, O, X},
 			{X, X, X}
 		});
 	}

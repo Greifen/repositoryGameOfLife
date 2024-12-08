@@ -47,5 +47,18 @@ class UniverseTest {
 			{X, X, O}
 		});
 	}
+	
+	@Test
+	void testnextState() {
+		assertArrayEquals(new Universe(new Cell.CellState[][] {
+			{X, X, X},
+			{O, X, X},
+			{X, X, O}
+		}).nextState().getState(),new Cell.CellState[][] {
+			{X, O, X},
+			{O, O, O},
+			{X, X, X}
+		});
+	}
 
 }

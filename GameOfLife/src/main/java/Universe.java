@@ -40,7 +40,6 @@ public class Universe {
 			for (int j = 0; j < state[i].length; j++) { // Iterating through columns
 
 				state[i][j].nextState(neighbours(copyCellStates, i, j));
-				stateR[i][j] = state[i][j].getCellState();
 			}
 		}
 	}
@@ -63,13 +62,13 @@ public class Universe {
 	}
 
 	private int neighbourInCell(Cell.CellState[][] state, int row, int column) {
-		int neighbours = 0;
+
 		if (column >= 0 && column < state[row].length) {
 			if (state[row][column] == Cell.CellState.ALIVE) {
-				neighbours++;
+				return 1;
 			}
 		}
-		return neighbours;
+		return 0;
 	}
 
 	private int neighboursInRow(Cell.CellState[][] state, int row, int column) {

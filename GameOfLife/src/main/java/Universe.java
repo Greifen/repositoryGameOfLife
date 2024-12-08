@@ -31,7 +31,7 @@ public class Universe {
 		return stateR;
 	}
 
-	public Universe nextState() {
+	public void nextState() {
 		Cell.CellState[][] copyCellStates = getState();
 		
 		Cell.CellState[][] stateR= new Cell.CellState[state.length][];
@@ -45,7 +45,6 @@ public class Universe {
 		    	stateR[i][j]=state[i][j].getCellState();
 		    }
 		}
-		return new Universe(stateR);
 	}
 
 	private int neighbours(Cell.CellState[][] state, int row, int column) {

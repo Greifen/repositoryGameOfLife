@@ -1,82 +1,85 @@
 
 public class Universe {
 
-	private Cell[][] state;
+	private Cell[][] cells;
 
 	public Universe(Cell.CellState[][] cellStates) {
-		state = new Cell[cellStates.length][];
+		cells = new Cell[cellStates.length][];
 
 		for (int i = 0; i < cellStates.length; i++) { // Iterating through rows
-			state[i] = new Cell[cellStates[i].length];
+			cells[i] = new Cell[cellStates[i].length];
 
 			for (int j = 0; j < cellStates[i].length; j++) { // Iterating through columns
-				state[i][j] = new Cell(cellStates[i][j]);
+				cells[i][j] = new Cell(cellStates[i][j]);
 			}
 		}
 
 	}
 
 	public Cell.CellState[][] getState() {
-		Cell.CellState[][] stateR = new Cell.CellState[state.length][];
+		Cell.CellState[][] stateR = new Cell.CellState[cells.length][];
 
-		for (int i = 0; i < state.length; i++) { // Iterating through rows
-			stateR[i] = new Cell.CellState[state[i].length];
+		for (int i = 0; i < cells.length; i++) { // Iterating through rows
+			stateR[i] = new Cell.CellState[cells[i].length];
 
-			for (int j = 0; j < state[i].length; j++) { // Iterating through columns
-				stateR[i][j] = state[i][j].getCellState();
+			for (int j = 0; j < cells[i].length; j++) { // Iterating through columns
+				stateR[i][j] = cells[i][j].getCellState();
 			}
 		}
 		return stateR;
 	}
 
 	public void nextState() {
-		Cell.CellState[][] copyCellStates = getState();
+		int[][] neighbour = new int[cells.length][];
 
-		Cell.CellState[][] stateR = new Cell.CellState[state.length][];
+		for (int i = 0; i < cells.length; i++) { // Iterating through rows
+			neighbour[i] = new int[cells[i].length];
+			
+			for (int j = 0; j < cells[i].length; j++) { // Iterating through columns
+				neighbour[i][j] = neighbours(i, j);
+			}
+		}
 
-		for (int i = 0; i < state.length; i++) { // Iterating through rows
-			stateR[i] = new Cell.CellState[state[i].length];
-
-			for (int j = 0; j < state[i].length; j++) { // Iterating through columns
-
-				state[i][j].nextState(neighbours(copyCellStates, i, j));
+		for (int i = 0; i < cells.length; i++) { // Iterating through rows
+			for (int j = 0; j < cells[i].length; j++) { // Iterating through columns
+				cells[i][j].nextState(neighbour[i][j]);
 			}
 		}
 	}
 
-	private int neighbours(Cell.CellState[][] state, int row, int column) {
+	private int neighbours(int row, int column) {
 		int neighbours = 0;
 
 		// obere Zeile
-		neighbours += neighboursInRow(state, row - 1, column);
+		neighbours += neighboursInRow(row - 1, column);
 
 		// mittlere Zeile
-		neighbours += neighbourInCell(state, row, column - 1);
-		neighbours += neighbourInCell(state, row, column + 1);
+		neighbours += neighbourInCell(row, column - 1);
+		neighbours += neighbourInCell(row, column + 1);
 
 		// untere Zeile
-		neighbours += neighboursInRow(state, row + 1, column);
+		neighbours += neighboursInRow(row + 1, column);
 
 		return neighbours;
 
 	}
 
-	private int neighbourInCell(Cell.CellState[][] state, int row, int column) {
+	private int neighbourInCell(int row, int column) {
 
-		if (column >= 0 && column < state[row].length) {
-			if (state[row][column] == Cell.CellState.ALIVE) {
+		if (column >= 0 && column < cells[row].length) {
+			if (cells[row][column].getCellState() == Cell.CellState.ALIVE) {
 				return 1;
 			}
 		}
 		return 0;
 	}
 
-	private int neighboursInRow(Cell.CellState[][] state, int row, int column) {
+	private int neighboursInRow(int row, int column) {
 		int neighbours = 0;
-		if (row >= 0 && row < state.length) {
-			neighbours += neighbourInCell(state, row, column - 1);
-			neighbours += neighbourInCell(state, row, column);
-			neighbours += neighbourInCell(state, row, column + 1);
+		if (row >= 0 && row < cells.length) {
+			neighbours += neighbourInCell(row, column - 1);
+			neighbours += neighbourInCell(row, column);
+			neighbours += neighbourInCell(row, column + 1);
 		}
 		return neighbours;
 	}

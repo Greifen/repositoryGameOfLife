@@ -3,23 +3,32 @@
 public class Universe {
 
 	
-	private Cell.CellState[][] state;
+	private Cell [][] state;
 	
 	public Universe(Cell.CellState[][] cellStates) {
-		state= new Cell.CellState[cellStates.length][];
+		state= new Cell[cellStates.length][];
 		
 		for (int i = 0; i < cellStates.length; i++) {  // Iterating through rows
-			state[i] = new Cell.CellState[cellStates[i].length];
+			state[i] = new Cell[cellStates[i].length];
 			
 		    for (int j = 0; j < cellStates[i].length; j++) {  // Iterating through columns
-		    	state[i][j]=cellStates[i][j];
+		    	state[i][j]=new Cell(cellStates[i][j]);
 		    }
 		}
 	
 	}
 
 	public Cell.CellState[][] getState() {
-		return state;
+		Cell.CellState[][] stateR= new Cell.CellState[state.length][];
+		
+		for (int i = 0; i < state.length; i++) {  // Iterating through rows
+			stateR[i] = new Cell.CellState[state[i].length];
+			
+		    for (int j = 0; j < state[i].length; j++) {  // Iterating through columns
+		    	stateR[i][j]=state[i][j].getCellState();
+		    }
+		}
+		return stateR;
 	}
 
 

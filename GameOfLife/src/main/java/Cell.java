@@ -32,4 +32,8 @@ public class Cell {
 		}
 	}
 
+	boolean isAlive() {
+		return getCellState() == Cell.CellState.ALIVE;
+	}
+
 }

@@ -1,4 +1,5 @@
 
+
 public class Universe {
 
 	private Cell[][] cells;
@@ -32,17 +33,17 @@ public class Universe {
 	public void nextState() {
 		int[][] neighbour = new int[cells.length][];
 
-		for (int i = 0; i < cells.length; i++) { // Iterating through rows
-			neighbour[i] = new int[cells[i].length];
-			
-			for (int j = 0; j < cells[i].length; j++) { // Iterating through columns
-				neighbour[i][j] = neighbours(i, j);
+		for (int row = 0; row < cells.length; row++) { // Iterating through rows
+			neighbour[row] = new int[cells[row].length];
+
+			for (int column = 0; column < cells[row].length; column++) { // Iterating through columns
+				neighbour[row][column] = neighbours(row, column);
 			}
 		}
 
-		for (int i = 0; i < cells.length; i++) { // Iterating through rows
-			for (int j = 0; j < cells[i].length; j++) { // Iterating through columns
-				cells[i][j].nextState(neighbour[i][j]);
+		for (int row = 0; row < cells.length; row++) { // Iterating through rows
+			for (int column = 0; column < cells[row].length; column++) { // Iterating through columns
+				cells[row][column].nextState(neighbour[row][column]);
 			}
 		}
 	}
@@ -54,8 +55,8 @@ public class Universe {
 		neighbours += neighboursInRow(row - 1, column);
 
 		// mittlere Zeile
-		neighbours += neighbourInCell(row, column - 1);
-		neighbours += neighbourInCell(row, column + 1);
+		if (getCell(row, column-1).isAlive()) neighbours++;
+		if (getCell(row, column+1).isAlive()) neighbours++;
 
 		// untere Zeile
 		neighbours += neighboursInRow(row + 1, column);
@@ -64,22 +65,19 @@ public class Universe {
 
 	}
 
-	private int neighbourInCell(int row, int column) {
-
+	private Cell getCell(int row, int column) {
 		if (column >= 0 && column < cells[row].length) {
-			if (cells[row][column].getCellState() == Cell.CellState.ALIVE) {
-				return 1;
-			}
+			return cells[row][column];
 		}
-		return 0;
+		return new Cell(Cell.CellState.DEAD);
 	}
 
 	private int neighboursInRow(int row, int column) {
 		int neighbours = 0;
 		if (row >= 0 && row < cells.length) {
-			neighbours += neighbourInCell(row, column - 1);
-			neighbours += neighbourInCell(row, column);
-			neighbours += neighbourInCell(row, column + 1);
+			if (getCell(row, column-1).isAlive()) neighbours++;
+			if (getCell(row, column).isAlive()) neighbours++;
+			if (getCell(row, column+1).isAlive()) neighbours++;
 		}
 		return neighbours;
 	}

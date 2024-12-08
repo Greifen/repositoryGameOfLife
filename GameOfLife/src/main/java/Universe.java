@@ -49,18 +49,17 @@ public class Universe {
 		int neighbours = 0;
 
 		// obere Zeile
-		if (row > 0) {
-			neighbours += neighboursInRow(state, row - 1, column);
-		}
+
+		neighbours += neighboursInRow(state, row - 1, column);
 
 		// mittlere Zeile
 		neighbours += neighboursInCell(state, row, column - 1);
 		neighbours += neighboursInCell(state, row, column + 1);
 
 		// untere Zeile
-		if (row < state.length - 1) {
-			neighbours += neighboursInRow(state, row + 1, column);
-		}
+
+		neighbours += neighboursInRow(state, row + 1, column);
+
 		return neighbours;
 
 	}
@@ -77,9 +76,11 @@ public class Universe {
 
 	private int neighboursInRow(Cell.CellState[][] state, int row, int column) {
 		int neighbours = 0;
-		neighbours += neighboursInCell(state, row, column - 1);
-		neighbours += neighboursInCell(state, row, column);
-		neighbours += neighboursInCell(state, row, column + 1);
+		if (row >= 0 && row < state.length) {
+			neighbours += neighboursInCell(state, row, column - 1);
+			neighbours += neighboursInCell(state, row, column);
+			neighbours += neighboursInCell(state, row, column + 1);
+		}
 		return neighbours;
 	}
 }

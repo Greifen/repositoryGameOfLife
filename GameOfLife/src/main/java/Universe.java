@@ -53,8 +53,8 @@ public class Universe {
 		neighbours += neighboursInRow(state, row - 1, column);
 
 		// mittlere Zeile
-		neighbours += neighboursInCell(state, row, column - 1);
-		neighbours += neighboursInCell(state, row, column + 1);
+		neighbours += neighbourInCell(state, row, column - 1);
+		neighbours += neighbourInCell(state, row, column + 1);
 
 		// untere Zeile
 
@@ -64,7 +64,7 @@ public class Universe {
 
 	}
 
-	private int neighboursInCell(Cell.CellState[][] state, int row, int column) {
+	private int neighbourInCell(Cell.CellState[][] state, int row, int column) {
 		int neighbours = 0;
 		if (column >= 0 && column < state[row].length) {
 			if (state[row][column] == Cell.CellState.ALIVE) {
@@ -77,9 +77,9 @@ public class Universe {
 	private int neighboursInRow(Cell.CellState[][] state, int row, int column) {
 		int neighbours = 0;
 		if (row >= 0 && row < state.length) {
-			neighbours += neighboursInCell(state, row, column - 1);
-			neighbours += neighboursInCell(state, row, column);
-			neighbours += neighboursInCell(state, row, column + 1);
+			neighbours += neighbourInCell(state, row, column - 1);
+			neighbours += neighbourInCell(state, row, column);
+			neighbours += neighbourInCell(state, row, column + 1);
 		}
 		return neighbours;
 	}

@@ -32,6 +32,7 @@ public class Universe {
 	}
 
 	public Universe nextState() {
+		Cell.CellState[][] copyCellStates = getState();
 		
 		Cell.CellState[][] stateR= new Cell.CellState[state.length][];
 		
@@ -40,33 +41,65 @@ public class Universe {
 			
 		    for (int j = 0; j < state[i].length; j++) {  // Iterating through columns
 		    	
-		    	state[i][j].nextState(neighbours(i, j));
+		    	state[i][j].nextState(neighbours(copyCellStates,i, j));
 		    	stateR[i][j]=state[i][j].getCellState();
 		    }
 		}
 		return new Universe(stateR);
 	}
 
-	private int neighbours(int row, int column) {
+	private int neighbours(Cell.CellState[][] state, int row, int column) {
 		int neighbours =0;
 		
-		if(row>0 && state[row-1][column].getCellState()==Cell.CellState.ALIVE) {
-			neighbours++;
+		//obere Zeile
+		if(row>0) {
+			int rowAbove = row-1;
+			if(column>0) {
+				if(state[rowAbove][column-1]==Cell.CellState.ALIVE) {
+					neighbours++;
+				}
+			}
+			if(state[rowAbove][column]==Cell.CellState.ALIVE) {
+				neighbours++;
+			}
+			if(column<state[rowAbove].length-1) {
+				if(state[rowAbove][column+1]==Cell.CellState.ALIVE) {
+					neighbours++;
+				}
+			}	
 		}
-		if(row<state.length-1 && state[row+1][column].getCellState()==Cell.CellState.ALIVE) {
-			neighbours++;
+		
+		//mittlere Zeile
+		if(column>0) {
+			if(state[row][column-1]==Cell.CellState.ALIVE) {
+				neighbours++;
+			}
 		}
-		if(column>0 && state[row][column-1].getCellState()==Cell.CellState.ALIVE) {
-			neighbours++;
+		if(column<state[row].length-1) {
+			if(state[row][column+1]==Cell.CellState.ALIVE) {
+				neighbours++;
+			}
 		}
-		if(column<state[row].length-1 && state[row][column+1].getCellState()==Cell.CellState.ALIVE) {
-			neighbours++;
+		
+		//untere Zeile
+		if(row<state.length-1)
+		{
+			int rowUnder = row+1;
+			if(column>0) {
+				if(state[rowUnder][column-1]==Cell.CellState.ALIVE) {
+					neighbours++;
+				}
+			}
+			if(state[rowUnder][column]==Cell.CellState.ALIVE) {
+				neighbours++;
+			}
+			if(column<state[rowUnder].length-1) {
+				if(state[rowUnder][column+1]==Cell.CellState.ALIVE) {
+					neighbours++;
+				}
+			}
 		}
 		return neighbours;
+			
 	}
-
-
-
-
-
 }

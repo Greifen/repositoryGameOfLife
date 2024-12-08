@@ -38,15 +38,17 @@ class UniverseTest {
 	@Test
 	void testStoreInitialState() {
 		Universe universe = new Universe(new Cell.CellState[][] {
-			{X, X, X},
+			{X, O, X},
 			{O, X, X},
 			{X, X, O}
 		});
-		assertArrayEquals(new Cell.CellState[][] {
-			{X, X, X},
+		Cell.CellState[][] expected = new Cell.CellState[][] {
+			{X, O, X},
 			{O, X, X},
 			{X, X, O}
-		}, universe.getState());
+		};
+		Cell.CellState[][] actual = universe.getState();
+		assertArrayEquals(expected, actual);
 	}
 	
 	@Test
@@ -57,11 +59,13 @@ class UniverseTest {
 			{X, X, O}
 		});
 		universe.nextState();
-		assertArrayEquals(new Cell.CellState[][] {
+		Cell.CellState[][] expected = new Cell.CellState[][] {
 			{O, O, X},
 			{O, O, X},
 			{X, X, X}
-		}, universe.getState());
+		};
+		Cell.CellState[][] actual = universe.getState();
+		assertArrayEquals(expected, actual);
 	}
 
 }

@@ -50,8 +50,7 @@ public class Universe {
 
 		// obere Zeile
 		if (row > 0) {
-			int rowAbove = row - 1;
-			neighbours += neighboursInRow(state, rowAbove, column);
+			neighbours += neighboursInRow(state, row - 1, column);
 		}
 
 		// mittlere Zeile
@@ -60,8 +59,7 @@ public class Universe {
 
 		// untere Zeile
 		if (row < state.length - 1) {
-			int rowUnder = row + 1;
-			neighbours += neighboursInRow(state, rowUnder, column);
+			neighbours += neighboursInRow(state, row + 1, column);
 		}
 		return neighbours;
 

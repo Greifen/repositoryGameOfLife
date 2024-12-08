@@ -62,8 +62,7 @@ class UniverseTest {
 			{X, X, O}
 		});
 		
-		universe.nextState();
-		Cell.CellState[][] actual = universe.getState();
+		Cell.CellState[][] actual = nextState(universe);
 		
 		Cell.CellState[][] expected = new Cell.CellState[][] {
 			{O, O, X},
@@ -72,6 +71,12 @@ class UniverseTest {
 		};
 
 		assertArrayEquals(expected, actual);
+	}
+
+	private Cell.CellState[][] nextState(Universe universe) {
+		universe.nextState();
+		Cell.CellState[][] actual = universe.getState();
+		return actual;
 	}
 
 }

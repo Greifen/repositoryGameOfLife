@@ -49,7 +49,6 @@ public class Universe {
 		int neighbours = 0;
 
 		// obere Zeile
-
 		neighbours += neighboursInRow(state, row - 1, column);
 
 		// mittlere Zeile
@@ -57,7 +56,6 @@ public class Universe {
 		neighbours += neighbourInCell(state, row, column + 1);
 
 		// untere Zeile
-
 		neighbours += neighboursInRow(state, row + 1, column);
 
 		return neighbours;

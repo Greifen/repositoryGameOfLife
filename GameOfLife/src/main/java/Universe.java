@@ -47,18 +47,19 @@ public class Universe {
 		return new Universe(stateR);
 	}
 
-	private int neighbours(int i, int j) {
+	private int neighbours(int row, int column) {
 		int neighbours =0;
-		if(i>0 && state[i-1][j].getCellState()==Cell.CellState.ALIVE) {
+		
+		if(row>0 && state[row-1][column].getCellState()==Cell.CellState.ALIVE) {
 			neighbours++;
 		}
-		if(i<state.length-1 && state[i+1][j].getCellState()==Cell.CellState.ALIVE) {
+		if(row<state.length-1 && state[row+1][column].getCellState()==Cell.CellState.ALIVE) {
 			neighbours++;
 		}
-		if(j>0 && state[i][j-1].getCellState()==Cell.CellState.ALIVE) {
+		if(column>0 && state[row][column-1].getCellState()==Cell.CellState.ALIVE) {
 			neighbours++;
 		}
-		if(j<state[i].length-1 && state[i][j+1].getCellState()==Cell.CellState.ALIVE) {
+		if(column<state[row].length-1 && state[row][column+1].getCellState()==Cell.CellState.ALIVE) {
 			neighbours++;
 		}
 		return neighbours;

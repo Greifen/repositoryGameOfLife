@@ -17,6 +17,7 @@ public class Cell {
 		ALIVE, DEAD
 	}
 
+	//ksjdfkksdjfsdfdssfsfd
 	public void nextState(int anzahlNachbarn) {
 		if (cellState == CellState.ALIVE) {
 			// underpopulation, overcrowding

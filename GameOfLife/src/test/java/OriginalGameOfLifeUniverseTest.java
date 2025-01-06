@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 
 
-class UniverseTest {
+class OriginalGameOfLifeUniverseTest {
 
 	/**
 	 * Die Zelle ist tot.
@@ -37,7 +37,7 @@ class UniverseTest {
 
 	@Test
 	void testStoreInitialState() {
-		Universe universe = new Universe(new Cell.CellState[][] {
+		Universe universe = new OriginalGameOfLifeUniverse(new Cell.CellState[][] {
 			{X, O, X},
 			{O, X, X},
 			{X, X, O}
@@ -56,7 +56,7 @@ class UniverseTest {
 	
 	@Test
 	void testnextState() {
-		Universe universe = new Universe(new Cell.CellState[][] {
+		Universe universe = new OriginalGameOfLifeUniverse(new Cell.CellState[][] {
 			{X, O, X},
 			{O, X, X},
 			{X, X, O}

@@ -1,12 +1,18 @@
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+//import static Cell.CellState.*;
 
 import gameloop.Game;
 
@@ -31,7 +37,7 @@ class GameOfLifeTest {
 	@Test
 	void invokesUpdateOfTheUniverse() {
 		Universe universe = mock(Universe.class);
-		Game<Void> uut = new GameOfLife(universe);
+		Game<Void> uut = new GameOfLife(universe, null);
 		
 		uut.update(null);
 		
@@ -42,9 +48,42 @@ class GameOfLifeTest {
 	
 	@Test
 	void isAlwaysRunning() {
-		GameOfLife uut = new GameOfLife(null);
+		GameOfLife uut = new GameOfLife(null, null);
 		
 		assertTrue(uut.isRunning());
 	}
 
+/*	@Test
+	public void printsInitialGameStateToConsole() {
+		Universe universe = new OriginalGameOfLifeUniverse(
+				new Cell.CellState[][] { { X, O, X }, { O, X, X }, { X, X, O } });
+		Game<Void> game = new GameOfLife(universe);
+		game.render();
+	}*/
+	
+	@Test
+	public void printsInitialGameStateToConsole() {
+		Universe universe = mock(Universe.class);
+		when(universe.getState()).thenReturn(new Cell.CellState[][] {
+			{Cell.CellState.DEAD, Cell.CellState.DEAD, Cell.CellState.DEAD},
+			{Cell.CellState.DEAD, Cell.CellState.DEAD, Cell.CellState.DEAD},
+			{Cell.CellState.DEAD, Cell.CellState.DEAD, Cell.CellState.DEAD}
+		});
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		PrintStream sysout = new PrintStream(out);
+		GameOfLife uut = new GameOfLife(universe, sysout);
+		
+		uut.render();
+		
+		String output = new String(out.toByteArray());
+		assertEquals(
+				"+-+-+-+\n"
+				+"|0|0|0|\n"
+				+"+-+-+-+\n"
+				+"|0|0|0|\n"
+				+"+-+-+-+\n"
+				+"|0|0|0|\n"
+				+"+-+-+-+\n",
+				output);
+	}
 }

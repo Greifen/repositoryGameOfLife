@@ -27,7 +27,10 @@ public class GameOfLife implements Game<Void> {
 	@Override
 	public void render() {
 		output.println("+-+");
-		output.println("|O|");
+		if (universe.getState()[0][0] == Cell.CellState.ALIVE)
+			output.println("|X|");
+		else
+			output.println("|O|");
 		output.println("+-+");
 	}
 

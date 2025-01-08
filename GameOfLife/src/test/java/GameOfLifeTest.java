@@ -62,7 +62,7 @@ class GameOfLifeTest {
 	}*/
 	
 	@Test
-	public void printsDeadCellInitialGameStateToConsole() {
+	public void printsDeadCell() {
 		Universe universe = mock(Universe.class);
 		when(universe.getState()).thenReturn(new Cell.CellState[][] {
 			{Cell.CellState.DEAD}
@@ -77,6 +77,26 @@ class GameOfLifeTest {
 		assertEquals(
 				"+-+" + newline 
 				+ "|O|" + newline 
+				+ "+-+" + newline,
+				output);
+	}
+	
+	@Test
+	public void printsAliveCell() {
+		Universe universe = mock(Universe.class);
+		when(universe.getState()).thenReturn(new Cell.CellState[][] {
+			{Cell.CellState.ALIVE}
+		});
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		GameOfLife uut = new GameOfLife(universe, new PrintStream(out));
+		
+		uut.render();
+
+		String output = new String(out.toByteArray());
+		String newline = System.lineSeparator();
+		assertEquals(
+				"+-+" + newline 
+				+ "|X|" + newline 
 				+ "+-+" + newline,
 				output);
 	}

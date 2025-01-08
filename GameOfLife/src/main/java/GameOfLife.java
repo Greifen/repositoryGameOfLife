@@ -26,10 +26,9 @@ public class GameOfLife implements Game<Void> {
 
 	@Override
 	public void render() {
-		output.print(
-				"+-+\n"
-				+"|O|\n"
-				+"+-+\n");
+		output.println("+-+");
+		output.println("|O|");
+		output.println("+-+");
 	}
 
 }

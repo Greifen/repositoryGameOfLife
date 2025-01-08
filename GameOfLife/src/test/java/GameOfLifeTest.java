@@ -74,9 +74,9 @@ class GameOfLifeTest {
 		
 		String output = new String(out.toByteArray());
 		assertEquals(
-				"+-+\n"
-				+"|O|\n"
-				+"+-+\n",
+				"+-+\r\n"
+				+"|O|\r\n"
+				+"+-+\r\n",
 				output);
 	}
 }

@@ -62,28 +62,21 @@ class GameOfLifeTest {
 	}*/
 	
 	@Test
-	public void printsInitialGameStateToConsole() {
+	public void printsDeadCellInitialGameStateToConsole() {
 		Universe universe = mock(Universe.class);
 		when(universe.getState()).thenReturn(new Cell.CellState[][] {
-			{Cell.CellState.DEAD, Cell.CellState.DEAD, Cell.CellState.DEAD},
-			{Cell.CellState.DEAD, Cell.CellState.DEAD, Cell.CellState.DEAD},
-			{Cell.CellState.DEAD, Cell.CellState.DEAD, Cell.CellState.DEAD}
+			{Cell.CellState.DEAD}
 		});
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		PrintStream sysout = new PrintStream(out);
-		GameOfLife uut = new GameOfLife(universe, sysout);
+		GameOfLife uut = new GameOfLife(universe, new PrintStream(out));
 		
 		uut.render();
 		
 		String output = new String(out.toByteArray());
 		assertEquals(
-				"+-+-+-+\n"
-				+"|0|0|0|\n"
-				+"+-+-+-+\n"
-				+"|0|0|0|\n"
-				+"+-+-+-+\n"
-				+"|0|0|0|\n"
-				+"+-+-+-+\n",
+				"+-+\n"
+				+"|O|\n"
+				+"+-+\n",
 				output);
 	}
 }

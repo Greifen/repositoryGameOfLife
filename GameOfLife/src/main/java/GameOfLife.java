@@ -27,13 +27,9 @@ public class GameOfLife implements Game<Void> {
 	@Override
 	public void render() {
 		output.print(
-				"+-+-+-+\n"
-				+"|0|0|0|\n"
-				+"+-+-+-+\n"
-				+"|0|0|0|\n"
-				+"+-+-+-+\n"
-				+"|0|0|0|\n"
-				+"+-+-+-+\n");
+				"+-+\n"
+				+"|O|\n"
+				+"+-+\n");
 	}
 
 }

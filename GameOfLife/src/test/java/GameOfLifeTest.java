@@ -71,12 +71,13 @@ class GameOfLifeTest {
 		GameOfLife uut = new GameOfLife(universe, new PrintStream(out));
 		
 		uut.render();
-		
+
 		String output = new String(out.toByteArray());
+		String newline = System.lineSeparator();
 		assertEquals(
-				"+-+\r\n"
-				+"|O|\r\n"
-				+"+-+\r\n",
+				"+-+" + newline 
+				+ "|O|" + newline 
+				+ "+-+" + newline,
 				output);
 	}
 }
